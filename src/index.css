@@ -1,5 +1,29 @@
+.app {
+  display: grid;
+  grid-template-areas:
+    ". title ."
+    ". game controls";
+  grid-template-columns: repeat(3, 1fr);
+}
+
 h1 {
   text-align: center;
+  grid-area: title;
+}
+
+.controls {
+  grid-area: controls;
+  margin: auto;
+}
+
+.upcoming {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 10px;
+}
+
+.cell.hidden {
+  visibility: hidden;
 }
 
 .board {
@@ -7,6 +31,7 @@ h1 {
   user-select: none;
   margin: auto;
   width: fit-content;
+  grid-area: game;
 }
 
 .row {
