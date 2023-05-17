@@ -14,6 +14,8 @@ import {
   getEmptyBoard,
   getRandomBlock,
 } from "./useTetrisBoard";
+import { Howl } from "howler";
+import scoremp3 from "../media/score.mp3";
 
 enum TickSpeed {
   Normal = 800,
@@ -83,6 +85,7 @@ export function useTetris() {
     }
     setUpcomingBlocks(newUpcomingBlocks);
     setScore((prevScore) => prevScore + getPoints(numCleared));
+
     dispatchBoardState({
       type: "commit",
       newBoard: [...getEmptyBoard(BOARD_HEIGHT - newBoard.length), ...newBoard],
@@ -226,10 +229,15 @@ export function useTetris() {
 }
 
 function getPoints(numCleared: number): number {
+  const scoreSound = new Howl({
+    src: [scoremp3],
+  });
   switch (numCleared) {
     case 0:
       return 0;
     case 1:
+      console.log(scoremp3);
+      scoreSound.play(scoremp3);
       return 100;
     case 2:
       return 300;
